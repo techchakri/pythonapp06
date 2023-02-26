@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
     - name: corona
-      image: jchakravarthi/app06:1.0
+      image: jchakravarthi/pythonapp06:1.0
       ports:
         - name: tomcatport
           containerPort: 8080
