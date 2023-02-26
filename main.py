@@ -23,7 +23,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def welcome():
-    return render_template('index.html',oxygenLevels=os.environ["oxyenLevels"],quarantine=os.environ["quarantine"],liters=os.environ["liters"],temperatureLevels=os.environ["temperatureLevel"])
+    return render_template('index.html',oxygenLevels=os.environ.get("oxyenLevels","90"),quarantine=os.environ.get("quarantine","7days"),liters=os.environ.get("liters","6"),temperatureLevels=os.environ.get("temperatureLevel","90-99"))
 
 @app.route('/success/<int:score>')
 def success(score):
