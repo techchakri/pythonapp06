@@ -14,14 +14,14 @@ spec:
           protocol: TCP
       readinessProbe:
         httpGet:
-          path: /healthz/ready
+          path: /readiness
           port: 8080
         initialDelaySeconds: 10
         timeoutSeconds: 10
         failureThreshold: 3
       livenessProbe:
         httpGet:
-          path: /healthz/live
+          path: /liveness
           port: 8080
         initialDelaySeconds: 10
         timeoutSeconds: 10
