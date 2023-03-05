@@ -12,7 +12,7 @@
 from flask import Flask, redirect , url_for , render_template , request
 import os
 import time
-from flask_healthz import Healthz
+from flask_healthz import healthz
 from flask_healthz import HealthError
 
 app = Flask(__name__)
