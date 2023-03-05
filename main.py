@@ -11,6 +11,7 @@
 
 from flask import Flask, redirect , url_for , render_template , request
 import os
+import time
 
 app = Flask(__name__)
 
@@ -61,6 +62,15 @@ def submit():
         total_score=(science+maths+c+data_science)/4
     return redirect(url_for("success",score=total_score))
 
+@app.route('/liveness')
+def healthx():
+  time.sleep(2);
+  return "<h1><center>Liveness check completed</center><h1>"
+  
+@app.route('/readiness')
+def healthz():
+  time.sleep(20);
+  return "<h1><center>Readiness check completed</center><h1>"
 
 
 
