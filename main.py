@@ -84,8 +84,8 @@ def readiness():
 
 app.config.update(
     HEALTHZ = {
-    "live" : "app.liveness",
-    "ready": "app.readiness"
+    "live" : "main.liveness",
+    "ready": "main.readiness"
     }
 )
 
