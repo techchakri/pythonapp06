@@ -7,21 +7,21 @@ metadata:
 spec:
   containers:
     - name: corona
-      image: jchakravarthi/pythonapp06:2.0
+      image: jchakravarthi/pythonapp06:4.0
       ports:
         - name: tomcatport
           containerPort: 8080
           protocol: TCP
       readinessProbe:
         httpGet:
-          path: /readiness
+          path: /healthz/ready
           port: 8080
         initialDelaySeconds: 10
         timeoutSeconds: 10
         failureThreshold: 3
       livenessProbe:
         httpGet:
-          path: /liveness
+          path: /healthz/live
           port: 8080
         initialDelaySeconds: 10
         timeoutSeconds: 10

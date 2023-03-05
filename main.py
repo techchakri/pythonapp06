@@ -12,16 +12,21 @@
 from flask import Flask, redirect , url_for , render_template , request
 import os
 import time
-# from flask_healthz import Healthz
+from flask_healthz import Healthz
+from flask_healthz import HealthError
 
 app = Flask(__name__)
 # Healthz(app, no_log=True)
+app.register_blueprint(healthz,url_prefix="/healthz")
 '''
   oxygenLevels: "90"
   quarantine: "13"
   liters: "6"
   temparatureLevels: "99 - 101"
 '''
+
+def printok():
+    print("Everything is fine")
 
 @app.route('/')
 def welcome():
@@ -63,15 +68,26 @@ def submit():
         total_score=(science+maths+c+data_science)/4
     return redirect(url_for("success",score=total_score))
 
-@app.route('/liveness')
-def healthx():
-  time.sleep(2);
-  return "OK"
+
+def liveness():
+    try:
+        printok()
+    except Exception:
+        raise HealthError("Can't connect to the file")
   
-@app.route('/readiness')
-def healthz():
-  time.sleep(20);
-  return "OK"
+
+def readiness():
+    try:
+        printok()
+    except Exception:
+        raise HealthError("Can't connect to the file")
+
+app.config.update(
+    HEALTHZ = {
+    "live" : "app.liveness",
+    "ready": "app.readiness"
+    }
+)
 
 
 
